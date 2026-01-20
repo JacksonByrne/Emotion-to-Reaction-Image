@@ -9,12 +9,15 @@ Real-time webcam emotion detection that shows one of your own images for the det
 - Works with either a conda environment (`environment.yml`) or a standard virtual environment using `requirements.txt`.  
 - Uses your own photos stored in the `images/` folder.
 
-## How to setup:
+## How to setup (pip / venv)
 
+```bash
 git clone https://github.com/JacksonByrne/Emotion-to-Reaction-Image.git
 cd Emotion-to-Reaction-Image
+
 python -m venv .venv
-source .venv/bin/activate
+source .venv/bin/activate        # Windows: .venv\Scripts\activate
+
 pip install -r requirements.txt
 
 (For windows use .venv\Scripts\activate instead of .venv/bin/activate)
@@ -28,3 +31,7 @@ conda activate emotion_detect
 ## To Run:
 cd src
 python face_to_images.py
+
+## To change Images:
+Go to 'images' folder and change images to whatever you'd like. Note that images must be named 'happy.jpg' etc.
+Images must also be .jpg ONLY
