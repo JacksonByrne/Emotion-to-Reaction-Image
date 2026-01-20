@@ -16,7 +16,7 @@ git clone https://github.com/JacksonByrne/Emotion-to-Reaction-Image.git
 cd Emotion-to-Reaction-Image
 
 python -m venv .venv
-source .venv/bin/activate        # Windows: .venv\Scripts\activate
+source .venv/bin/activate
 
 pip install -r requirements.txt
 ```
