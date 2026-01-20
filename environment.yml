@@ -1,0 +1,14 @@
+name: emotion_detect
+channels:
+  - defaults
+dependencies:
+  - python=3.11
+  - pip
+  - opencv
+  - pip:
+      - opencv-python
+      - transformers
+      - torch
+      - pillow
+      - numpy
+      - tf-keras

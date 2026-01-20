@@ -1,0 +1,6 @@
+opencv-python
+transformers
+torch
+pillow
+numpy
+tf-keras
