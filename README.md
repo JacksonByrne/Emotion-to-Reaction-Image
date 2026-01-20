@@ -37,5 +37,5 @@ python face_to_images.py
 ```
 
 ## To change images:
-Go to 'images' folder and change images to whatever you'd like. Note that images must be named 'happy.jpg' etc.
+Go to 'images' folder and change images to whatever you'd like. Note that images must be named 'happy.jpg' etc.  
 Images must also be .jpg ONLY
