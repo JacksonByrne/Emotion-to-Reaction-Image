@@ -10,7 +10,19 @@ Real-time webcam emotion detection that shows one of your own images for the det
 - Uses your own photos stored in the `images/` folder.
 
 ## How to setup (pip / venv)
+### 1. Install PyTorch
 
+PyTorch needs a platform-specific wheel, so install it using the official command for your OS and Python version:
+
+https://pytorch.org/get-started/locally/
+
+Example (CPU only):
+```bash
+pip install torch --index-url https://download.pytorch.org/whl/cpu
+```bash
+pip install torch --index-url https://download.pytorch.org/whl/cpu
+```
+### 2. Install the libraries required
 ```bash
 git clone https://github.com/JacksonByrne/Emotion-to-Reaction-Image.git
 cd Emotion-to-Reaction-Image
@@ -22,7 +34,7 @@ pip install -r requirements.txt
 ```
 (For windows use .venv\Scripts\activate instead of .venv/bin/activate)
 
-## Setup with Conda:
+## OR setup with Conda:
 ```bash
 git clone https://github.com/JacksonByrne/Emotion-to-Reaction-Image.git
 cd Emotion-to-Reaction-Image
