@@ -4,11 +4,10 @@ channels:
 dependencies:
   - python=3.11
   - pip
-  - opencv
   - pip:
       - opencv-python
       - transformers
       - torch
       - pillow
-      - numpy
+      - numpy<2
       - tf-keras
