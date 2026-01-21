@@ -5,9 +5,9 @@ import numpy as np
 import os
 import sys
 
-
+image_folder = "images"
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-image_folder = os.path.join(BASE_DIR, "..", "images")
+image_folder = os.path.join(BASE_DIR, "..", image_folder)
 image_folder = os.path.normpath(image_folder)
 
 print(f"1️⃣  Checking folder...")
@@ -21,25 +21,39 @@ if not os.path.exists(image_folder):
 emotion_images = {}
 emotions_list = ['happy', 'sad', 'angry', 'neutral', 'surprise', 'fear', 'disgust']
 
-for emotion in emotions_list:
-    img_path = os.path.join(image_folder, f"{emotion}.jpg")
-    print(f"    {emotion}.jpg... ", end="", flush=True)
-    
-    if os.path.exists(img_path):
-        try:
+def load_emotion_images(folder):
+    print(f"\n1️⃣  Loading images from: {folder}")
+    emotion_images = {}
+
+    for emotion in emotions_list:
+        img_path = os.path.join(folder, f"{emotion}.jpg")
+        print(f"    {emotion}.jpg... ", end="", flush=True)
+
+        if os.path.exists(img_path):
             img = cv2.imread(img_path)
             if img is not None:
                 h, w, c = img.shape
                 emotion_images[emotion] = img
                 print(f"✓ ({w}x{h})")
             else:
-                print(f"✗ (read failed)")
-        except Exception as e:
-            print(f"✗ ({e})")
-    else:
-        print(f"✗ (not found)")
+                print("✗ (read failed)")
+        else:
+            print("✗ (not found)")
 
-print(f"\n    ✅ Total loaded: {len(emotion_images)}/{len(emotions_list)}")
+    print(f"    ✅ Total loaded: {len(emotion_images)}/{len(emotions_list)}")
+    return emotion_images
+
+emotion_images = load_emotion_images(image_folder)
+current_emotion_image = emotion_images[list(emotion_images.keys())[0]]
+current_emotion = list(emotion_images.keys())[0]
+
+emotion_images = load_emotion_images(image_folder)
+if not emotion_images:
+    print("❌ No emotion images loaded, exiting.")
+    sys.exit(1)
+
+current_emotion = list(emotion_images.keys())[0]
+current_emotion_image = emotion_images[current_emotion]
 
 print(f"\n3️⃣  Opening webcam...")
 cap = cv2.VideoCapture(0)
@@ -126,6 +140,22 @@ while True:
         print(f"Error creating display: {e}")
     
     key = cv2.waitKey(1) & 0xFF
+
+    if key == ord('d'):
+        if image_folder.endswith(os.path.sep + "images"):
+            image_folder = os.path.join(os.path.dirname(image_folder), "images_2")
+        else:
+            image_folder = os.path.join(os.path.dirname(image_folder), "images")
+
+        image_folder = os.path.normpath(image_folder)
+        emotion_images = load_emotion_images(image_folder)
+
+        if emotion_images:
+            current_emotion = list(emotion_images.keys())[0]
+            current_emotion_image = emotion_images[current_emotion]
+        print(f"\n🔁 Dev toggle: now using {image_folder}")
+        continue
+
     if key == ord('q'):
         print("\nQuitting...")
         break
