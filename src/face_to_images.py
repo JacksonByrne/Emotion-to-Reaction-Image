@@ -10,19 +10,19 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 image_folder = os.path.join(BASE_DIR, "..", image_folder)
 image_folder = os.path.normpath(image_folder)
 
-print(f"1️⃣  Checking folder...")
-print(f"    Path: {image_folder}")
-print(f"    Exists: {os.path.exists(image_folder)}")
+print(f"Checking folder...")
+print(f"Path: {image_folder}")
+print(f"Exists: {os.path.exists(image_folder)}")
 
 if not os.path.exists(image_folder):
-    print("    ❌ FOLDER NOT FOUND!")
+    print("FOLDER NOT FOUND!")
     sys.exit(1)
 
 emotion_images = {}
 emotions_list = ['happy', 'sad', 'angry', 'neutral', 'surprise', 'fear', 'disgust']
 
 def load_emotion_images(folder):
-    print(f"\n1️⃣  Loading images from: {folder}")
+    print(f"\n Loading images from: {folder}")
     emotion_images = {}
 
     for emotion in emotions_list:
@@ -34,13 +34,12 @@ def load_emotion_images(folder):
             if img is not None:
                 h, w, c = img.shape
                 emotion_images[emotion] = img
-                print(f"✓ ({w}x{h})")
             else:
-                print("✗ (read failed)")
+                print("read failed")
         else:
-            print("✗ (not found)")
+            print("not found")
 
-    print(f"    ✅ Total loaded: {len(emotion_images)}/{len(emotions_list)}")
+    print(f"Total loaded: {len(emotion_images)}/{len(emotions_list)}")
     return emotion_images
 
 emotion_images = load_emotion_images(image_folder)
@@ -49,32 +48,27 @@ current_emotion = list(emotion_images.keys())[0]
 
 emotion_images = load_emotion_images(image_folder)
 if not emotion_images:
-    print("❌ No emotion images loaded, exiting.")
+    print("No emotion images loaded, exiting.")
     sys.exit(1)
 
 current_emotion = list(emotion_images.keys())[0]
 current_emotion_image = emotion_images[current_emotion]
 
-print(f"\n3️⃣  Opening webcam...")
+print(f"\n Opening webcam...")
 cap = cv2.VideoCapture(0)
 cap.set(3, 1920)  # width
 cap.set(4, 540)   # height
 
 if not cap.isOpened():
-    print("    ❌ Cannot open webcam!")
+    print("Cannot open webcam!")
     sys.exit(1)
 
-
-print(f"\n4️⃣  Loading face detector...")
 face_cascade = cv2.CascadeClassifier(
     cv2.data.haarcascades + 'haarcascade_frontalface_default.xml'
 )
-print("    ✓ Face detector loaded")
 
-print(f"\n5️⃣  Loading emotion classifier...")
 classifier = pipeline("image-classification", 
                     model="trpakov/vit-face-expression")
-print("    ✓ Emotion classifier loaded")
 
 print("\n" + "="*30)
 print("Press 'q' to quit")
@@ -87,7 +81,7 @@ frame_count = 0
 while True:
     ret, frame = cap.read()
     if not ret:
-        print("❌ Failed to read frame")
+        print("Failed to read frame")
         break
     
     frame_count += 1
@@ -117,7 +111,6 @@ while True:
         except Exception as e:
             print(f"  Error: {e}")
     
-    # Create combined image
     try:
         if current_emotion_image is not None:
             emotion_img_resized = cv2.resize(current_emotion_image, (w, h))
