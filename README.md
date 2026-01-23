@@ -13,7 +13,7 @@ Real-time webcam emotion detection that shows one of your own images for the det
 ```bash
 git clone https://github.com/JacksonByrne/Emotion-to-Reaction-Image.git
 cd Emotion-to-Reaction-Image
-conda env create -f environment.yml
+conda env create -f emotion_detect.yml
 conda activate emotion_detect
 ```
 
