@@ -43,6 +43,7 @@ pip install -r requirements.txt
 
 ## To Run:
 ```bash
+#In: Emotion-to-Reaction-Image
 cd src
 python face_to_images.py
 ```
